@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Design Patterns: Observer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Design Pattern: Observer</h1>
+    </div>
+
+    <script src="Observer/observer.js"></script>
+    <script>
+
+        var screenSubscriber = {
+            log: function (height) {
+                console.log(height);
+            }
+        };
+
+        var screen = observer.extend({
+            publishHeight: function () {
+                var height = document.getElementsByTagName('body')[0].clientHeight;
+                this.trigger('resize', height);
+            }
+        });
+
+        screen.on('resize', screenSubscriber.log);
+
+        window.onresize = function () {
+            screen.publishHeight();
+        }
+
+    </script>
+</body>
+</html>
